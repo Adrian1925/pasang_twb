@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Personal - Start Bootstrap Theme</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Start Bootstrap</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+                            <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="py-5">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="row">
+                            <!-- Image upload and generate button -->
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <img id="img1" class="card-img-top" alt="your image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pilih gambar kamu</h5>
+                                        <form method="post" action="#" id="#">
+                                            <div class="form-group files">
+                                              <label>Upload Your File </label>
+                                              <input type="file" class="form-control" accept="image/*" onchange="loadFile(event)" multiple="">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <button class="btn btn-success btn-block" onclick="gen()">Generate</button>
+                                </div>
+                            </div>
+                            <!-- Canvas preview -->
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <canvas id="canvas" class="card-img-top"></canvas>
+                                    <div class="card-body text-center">
+                                        <button id="btndownload" class="btn btn-primary btn-block">Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- About Section-->
+            <section class="bg-light py-5">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-xxl-8">
+                            <div class="text-center my-5">
+                                <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About E-comp</span></h2>
+                                <p class="lead fw-light mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
+                                <div class="d-flex justify-content-center fs-2 gap-4">
+                                    <a class="text-gradient" href="#!"><i class="bi bi-twitter"></i></a>
+                                    <a class="text-gradient" href="#!"><i class="bi bi-linkedin"></i></a>
+                                    <a class="text-gradient" href="#!"><i class="bi bi-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-white py-4 mt-auto">
+            <div class="container px-5">
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('img1');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() {
+                    URL.revokeObjectURL(output.src);
+                }
+            };
+
+            function gen() {
+                alert("clicked");
+                // Mensetting Variabel
+                var img1 = document.getElementById('img1');
+                var img2 = new Image();
+                img2.src = 'assets/twibbon.png';
+                img2.onload = function() {
+                    var canvas = document.getElementById("canvas");
+                    var context = canvas.getContext("2d");
+                    var width = img2.width;
+                    var height = img2.height;
+                    canvas.width = width;
+                    canvas.height = height;
+                    // Fungsi untuk men-draw gambar
+                    context.drawImage(img1, 0, 0, width, height);
+                    context.drawImage(img2, 0, 0, width, height);
+                };
+            }
+
+            function download(canvas, filename) {
+                // create an "off-screen" anchor tag
+                var lnk = document.createElement('a'), e;
+
+                // the key here is to set the download attribute of the a tag
+                lnk.download = filename;
+
+                // convert canvas content to data-uri for link. When download
+                // attribute is set the content pointed to by link will be
+                // pushed as "download" in HTML5 capable browsers
+                lnk.href = canvas.toDataURL("image/png;base64");
+
+                // create a "fake" click-event to trigger the download
+                if (document.createEvent) {
+                    e = document.createEvent("MouseEvents");
+                    e.initMouseEvent("click", true, true, window,
+                                    0, 0, 0, 0, 0, false, false, false,
+                                    false, 0, null);
+
+                    lnk.dispatchEvent(e);
+                } else if (lnk.fireEvent) {
+                    lnk.fireEvent("onclick");
+                }
+            }
+
+            var dwn = document.getElementById('btndownload');
+            dwn.onclick = function(){
+                var canvas = document.getElementById("canvas");
+                download(canvas, 'image.png');
+            };
+        </script>
+    </body>
+</html>
